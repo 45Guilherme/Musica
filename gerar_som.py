@@ -5,15 +5,21 @@ import struct
 arquivo = wave.open("som.wav", "w")
 arquivo.setparams((1, 2, 44100, 0, "NONE", "not compressed"))
 frequencia = 440
+frequencia2 = 660
 duracao = 2
 taxa_amostragem = 44100
 total_amostragem = int(taxa_amostragem * duracao)
 
+volume = 1.0
+
+
 for i in range(total_amostragem):
+    volume = 0.3
     valor = math.sin(2 * math.pi * frequencia * (i / taxa_amostragem))
-    amplitude = int(valor * 32767)
+    amplitude = int(valor * 32767 * volume)
     dados = struct.pack("<h", amplitude)
     arquivo.writeframes(dados)
+
 
 arquivo.close()
 
